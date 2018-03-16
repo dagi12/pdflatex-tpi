@@ -1,0 +1,541 @@
+\section{Ćwiczenia 12: 25-V-2017}
+We wszystkich zadaniach $\mathbb{Q}$ oznacza ciało skończone. Można bez dowodu korzystać z faktu, że $\mathbb{Q}^n$ (ze standardowymi operacjami na wektorach) jest przestrzenią liniową nad $\mathbb{Q}$. Można też korzystać z faktu, że moc ciała skończonego jest potęgą liczby pierwszej.
+
+\subsection{Zadania domowe A}
+\paragraph{A1} Podaj przykład kodu $C\subseteq \mathbb{F}^5_3$ (wypisując wszystkie jego słowa), który
+\begin{enumerate}[label=\alph*)]
+\item jest linowym kodem wymiaru 2.
+
+\textbf{Odpowiedź:}
+\begin{align*}
+&C\subseteq Q^5& Q=\mathtt{F}_3
+\end{align*}
+\textbf{wymiar kodu} $\rightarrow$ liczba wektorów (macierzy generującej), które generują dany kod, czyli spełnia równanie:
+\begin{align*}
+\bar{x}&= \alpha _1\bar{\pi}_1 + \alpha\bar{\pi}_2 &\rightarrow\text{kod wymiaru 2}\\
+|C|&=q^k &\text{liczba słów gdy kod jest }[n,k]\\
+&n-k&\rightarrow\text{liczba wierszy w macierzy parzystości}\\
+&k&\rightarrow\text{wymiar kodu}
+\end{align*}
+Czyli rozwiązaniem jest na przykład kod $|Q|=q=3$ którego macierz generująca ma postać:
+$$G=\begin{bmatrix}
+1&1&0&0&0\\0&0&1&1&1
+\end{bmatrix}$$ 
+\begin{align*}
+&\bar{\pi}_1=[11000] &\bar{\pi}_2=[00111]\\
+&\alpha =\{0,1,2\}\\
+&\bar{x}=\alpha_1\bar{\pi}_1+\alpha_2\bar{\pi}_2
+\end{align*}
+daje kod:
+$$C=\{(00000),(11000),(22000),(00111),(00222),(11111),(11222),(22111),(22222)\}$$
+\item jest liniowy i ma dokładnie 9 słów.
+
+\textbf{Odpowiedź:}\# lenistwo $\rightarrow$ macierz jak wyżej tylko $|Q|=q=3$
+$$C=\{(00000),(11000),(22000),(00111),(00222),(11111),(11222),(22111),(22222)\}$$
+\item jest kodem $[5, 2]$, o rozstępie 2.
+
+\textbf{Odpowiedź:}\# lenistwo $\rightarrow$ macierz wyżej Ctrl C, Ctrl V
+\end{enumerate}
+
+\paragraph{A2}
+\begin{enumerate}[label=\alph*)]
+\item Ile elementów ma kod binarny długości 10, wymiaru 3?
+
+\textbf{Odpowiedź:}
+\begin{align*}
+&n=10&k=3&|Q|=q=2&\\
+&|C|=q^k=2^3=8
+\end{align*}
+\item Ile elementów ma kod długości $n$, wymiaru $k$, nad ciałem $Q$, jeżeli $|Q| = q$?
+
+\textbf{Odpowiedź:}$|C|=q^k$
+\item Ile elementów może liczyć ciało $Q$, jeżeli pewien kod liniowy nad tym ciałem składa się z 49 słów? Podaj wszystkie możliwości.
+
+\textbf{Odpowiedź:}
+\begin{align*}
+&|C|=q^k&|C|=49\\
+&q=7\ k=2& q=49\ k=1
+\end{align*}
+\item Jaki może być wymiar kodu liniowego składającego się z 16 słów? Podaj wszystkie możliwości.
+
+\textbf{Odpowiedź:}
+\begin{align*}
+&C=16&k=?\\
+&k=1,2,4
+\end{align*}
+wiemy, to z faktu, że $|C|=q^k$ (przyjmujemy, że $q$ jest liczbą pierwszą czyli 1,2,3,5,7... lub potęgą liczby pierwszej)\\
+dla $q=2^4=16$ wtedy $k=1$\\
+dla $q=2^3=8$ wtedy  $k=2$\\
+dla $q=2^1=2$ wtedy $k=4$
+\end{enumerate}
+
+\paragraph{A3} Wypisz wszystkie słowa kodu liniowego nad ciałem $\mathbb{F}_3$, o poniższej macierzy generującej.
+\begin{enumerate}[label=\alph*)]
+\item $\begin{bmatrix}
+1& 0& 1& 0& 1\\
+1& 2& 1& 1& 1
+\end{bmatrix}$
+
+\textbf{Odpowiedź:}
+\begin{align*}
+&\bar{v}=\alpha_1\pi_1+ \alpha _2\pi_2\\
+&\alpha _1,\alpha_2\in\{0,1,2\}\\
+&\pi_1=[10101]\\
+&\pi_2=[12111]\\
+&\begin{array}{l|l|l||l|l}
+\alpha & \pi_1 & \alpha\pi_1 &\pi _2 &\alpha\pi_2\\\hline
+0 & 10101 & 00000 & 12111 & 00000 \\
+1 & 10101 & 10101 & 12111 & 12111 \\
+2 & 10101 & 20202 & 12111 & 21222 \\
+\end{array}
+\end{align*}
+I sumujemy każdy z każdym czyli $|C|=q^k=3^2=9$ słów
+$$C=\{(00000),(10101),(12111),(20202),(21222),(22212),(02010),(01020),(11121)\}$$
+\item $\begin{bmatrix}
+1& 2& 1& 1& 1\\
+1& 1& 1& 2& 1 \end{bmatrix}$
+
+\textbf{Odpowiedź:}
+\begin{align*}
+&\bar{v}=\alpha_1\pi_1+ \alpha _2\pi_2\\
+&\alpha _1,\alpha_2\in\{0,1,2\}\\
+&\pi_1=[12111]\\
+&\pi_2=[11121]\\
+&\begin{array}{l|l|l||l|l}
+\alpha & \pi_1 & \alpha\pi_1 &\pi _2 &\alpha\pi_2\\\hline
+0 & 12111 & 00000 & 11121 & 00000 \\
+1 & 12111 & 12111 & 11121 & 11121 \\
+2 & 12111 & 21222 & 11121 & 22212 \\
+\end{array}
+\end{align*}
+$$C=\{(00000),(12111),(11121),(21222),(22212),(20202),(01020),(02010),(10101)\}$$
+\end{enumerate}
+
+
+\paragraph{A4} Dany jest kod $C$ składający się ze słów: $(0, 1, 0, 1), (1, 0, 1, 1), (0, 0, 0, 0), (1, 1, 1, 0)$.
+\begin{enumerate}[label=\alph*)]
+\item Czy $C$ jest kodem liniowym, gdy rozpatrujemy go nad ciałem $\mathbb{F}_2$?
+
+\textbf{Odpowiedź: }$q=2$, $|C|=4$\\
+\textbf{Tak} jak zrobimy macierz generującą: $G=\begin{bmatrix}
+0&1&0&1\\1&0&1&1
+\end{bmatrix}$ to dostajemy, że  $k=2$ więc $C\subseteq \mathtt{F}_2$
+\item Czy jest liniowy gdy rozpatrujemy go jako kod nad ciałem $\mathbb{F}_5$? 
+
+\textbf{Odpowiedź: }(założenie, że kod $C\subseteq \mathtt{F}_5$) więc kod powinien mieć $5^k$ elementów a mamy tylko $|C|=4$, więc nie.
+\end{enumerate}
+Jeśli odpowiedź na którekolwiek z tych pytań jest twierdzącą znajdź przykładowa, macierz generującą tego kodu.
+
+\paragraph{A5} Macierz generująca kodu $C$ nad ciałem $\mathbb{F}_5$ ma postać
+$$G =\begin{bmatrix}
+1& 0& 4& 0\\
+0& 1& 1& 1 \end{bmatrix}$$
+\begin{enumerate}[label=\alph*)]
+\item Jaki jest wymiar kodu $C$?
+
+\textbf{Odpowiedź: }wymiar: $k=2$, bo dwa wiersze
+\item Ile słów należy do kodu $C$?
+
+\textbf{Odpowiedź: }$|C|=q^k=5^2=25$
+\item znajdź przykładowa, macierz parzystości dla kodu $C$.
+
+\textbf{Odpowiedź: }$H=\begin{bmatrix}
+1&4&1&0\\0&4&0&1
+\end{bmatrix}$
+\item  Korzystając z macierzy parzystości, sprawdź, które ze słów $(1, 2, 1, 2),(3, 3, 3, 3),(1, 2, 3, 4)$ należą do tego kodu. Przedstaw każde z (podanych) słów należących do $C$ jako kombinacje, liniową wierszy macierzy $G$.
+
+\textbf{Odpowiedź: }\begin{align*}
+&\begin{bmatrix}
+1&4&1&0\\0&4&0&1
+\end{bmatrix}\begin{bmatrix}
+1\\2\\1\\2
+\end{bmatrix}=\begin{bmatrix}
+0\\0
+\end{bmatrix}&1212=1040+2*0111=1040+0222=1212\\
+&\begin{bmatrix}
+1&4&1&0\\0&4&0&1
+\end{bmatrix}\begin{bmatrix}
+3\\3\\3\\3
+\end{bmatrix}=\begin{bmatrix}
+3\\0
+\end{bmatrix}\\
+&\begin{bmatrix}
+1&4&1&0\\0&4&0&1
+\end{bmatrix}\begin{bmatrix}
+1\\2\\3\\4
+\end{bmatrix}=\begin{bmatrix}
+2\\2
+\end{bmatrix}
+\end{align*}
+\end{enumerate}
+
+\paragraph{A6} Macierz parzystości kodu $C$ nad ciałem $\mathbb{F}_5$ ma postać
+$$H =\begin{bmatrix}
+2& 3& 4& 1& 0\\
+1& 1& 1& 0& 1 
+\end{bmatrix}$$
+\begin{enumerate}[label=\alph*)]
+\item sprawdź, które ze słów $(4, 1, 3, 3, 3),(1, 1, 2, 2, 2),(1, 2, 3, 1, 2)$ należą do kodu $C$.
+
+\begin{align*}
+&\begin{bmatrix}
+2& 3& 4& 1& 0\\
+1& 1& 1& 0& 1 
+\end{bmatrix}\begin{bmatrix}
+4\\ 1\\ 3\\ 3\\ 3
+\end{bmatrix}=\begin{bmatrix}
+1\\1
+\end{bmatrix}\\
+&\begin{bmatrix}
+2& 3& 4& 1& 0\\
+1& 1& 1& 0& 1 
+\end{bmatrix}\begin{bmatrix}
+1\\ 1\\ 2\\ 2\\ 2
+\end{bmatrix}=\begin{bmatrix}
+0\\1
+\end{bmatrix}\\
+&\begin{bmatrix}
+2& 3& 4& 1& 0\\
+1& 1& 1& 0& 1 
+\end{bmatrix}\begin{bmatrix}
+1\\ 2\\ 3\\ 1\\ 2
+\end{bmatrix}=\begin{bmatrix}
+1\\3
+\end{bmatrix}
+\end{align*}
+Żadne z podanych słów nie należy do $C$
+\item Dla każdego z powyższych słów, które do $C$ nie należą, znajdź wszystkie najbliższe mu słowa kodu $C$.
+
+\begin{align*}
+&\begin{bmatrix}
+2& 3& 4& 1& 0\\
+1& 1& 1& 0& 1 
+\end{bmatrix}\begin{bmatrix}
+4\\ 1\\ 3\\ 3\\ 3
+\end{bmatrix}=\begin{bmatrix}
+1\\1
+\end{bmatrix}& \begin{bmatrix}
+2& 3& 4& 1& 0\\
+1& 1& 1& 0& 1 
+\end{bmatrix}\begin{bmatrix}
+0\\ 0\\ 0\\ 1\\ 1
+\end{bmatrix}=\begin{bmatrix}
+1\\1
+\end{bmatrix}\\
+&\bbordermatrix{
+&&&&&\cr
+&4&1&3&3&3\cr
+-&0&0&0&1&1\cr
+=&4&1&3&2&2
+}&\begin{bmatrix}
+2& 3& 4& 1& 0\\
+1& 1& 1& 0& 1 
+\end{bmatrix}\begin{bmatrix}
+4\\ 1\\ 3\\ 2\\ 2
+\end{bmatrix}=\begin{bmatrix}
+0\\0
+\end{bmatrix}\\
+&\begin{bmatrix}
+2& 3& 4& 1& 0\\
+1& 1& 1& 0& 1 
+\end{bmatrix}\begin{bmatrix}
+1\\ 1\\ 2\\ 2\\ 2
+\end{bmatrix}=\begin{bmatrix}
+0\\1
+\end{bmatrix} &\begin{bmatrix}
+2& 3& 4& 1& 0\\
+1& 1& 1& 0& 1 
+\end{bmatrix}\begin{bmatrix}
+0\\ 0\\ 0\\ 0\\ 1
+\end{bmatrix}=\begin{bmatrix}
+0\\1
+\end{bmatrix} \\
+&\bbordermatrix{
+&&&&&\cr
+&1&1&2&2&2\cr
+-&0&0&0&0&1\cr
+=&1&1&2&2&1
+}&\begin{bmatrix}
+2& 3& 4& 1& 0\\
+1& 1& 1& 0& 1 
+\end{bmatrix}\begin{bmatrix}
+1\\ 1\\ 2\\ 2\\ 1
+\end{bmatrix}=\begin{bmatrix}
+0\\0
+\end{bmatrix}\\
+&\begin{bmatrix}
+2& 3& 4& 1& 0\\
+1& 1& 1& 0& 1 
+\end{bmatrix}\begin{bmatrix}
+1\\ 2\\ 3\\ 1\\ 2
+\end{bmatrix}=\begin{bmatrix}
+1\\3
+\end{bmatrix}&\begin{bmatrix}
+2& 3& 4& 1& 0\\
+1& 1& 1& 0& 1 
+\end{bmatrix}\begin{bmatrix}
+3\\ 0\\ 0\\ 0\\ 0
+\end{bmatrix}=\begin{bmatrix}
+1\\3
+\end{bmatrix}\\
+&\bbordermatrix{
+&&&&&\cr
+&1&2&3&1&2\cr
+-&3&0&0&0&0\cr
+=&3&2&3&1&2
+}&\begin{bmatrix}
+2& 3& 4& 1& 0\\
+1& 1& 1& 0& 1 
+\end{bmatrix}\begin{bmatrix}
+3\\ 2\\ 3\\ 1\\ 2
+\end{bmatrix}=\begin{bmatrix}
+0\\0
+\end{bmatrix}
+\end{align*}
+\item Jaki jest wymiar kodu $C$? Ile słów ma kod?
+
+\textbf{Odpowiedź: }$n=5$ $\rightarrow$ długość kodu, (\# Patrze na następne zadanie\# lenistwo) więc wymiar: $k=3$
+$$|C|=q^k=5^3=125$$
+\item znajdź przykładowa, macierz generującą dla kodu $C$.
+
+\textbf{Odpowiedź:} jak pamiętamy ten fajny wzór:\\
+Gdy macierz $G$ jest postaci (postać normalna):
+$$G=\begin{bmatrix}
+{\Huge I_k}& {\Huge P}
+\end{bmatrix}$$
+to
+$$\begin{bmatrix}
+{\Huge -P^T} & {\Huge I_{n-k}}
+\end{bmatrix}$$ jest (jedną z) macierzy parzystości\
+Więc: $$G=\begin{bmatrix}
+1 & 0 & 0 & 5-2 & 5-1\\
+0 & 1 & 0 & 5-3 & 5-1\\
+0 & 0 & 1 & 5-4 & 5-1
+\end{bmatrix}=\begin{bmatrix}
+1 & 0 & 0 & 3 & 4\\
+0 & 1 & 0 & 2 & 4\\
+0 & 0 & 1 & 1 & 4
+\end{bmatrix}$$
+\end{enumerate}
+
+\paragraph{A7} Macierz parzystości kodu $C$ \underline{binarnego} ma postać
+$$H =
+\begin{bmatrix}
+0& 1& 0& 1\\
+0& 1& 1& 1 
+\end{bmatrix}$$
+\begin{enumerate}[label=\alph*)]
+\item znajdź przynajmniej jedno słowo kodu najbliższe słowu $y = (0, 1, 0, 1)$.
+
+\textbf{Odpowiedź: }$q=2$
+$$\begin{bmatrix}
+0& 1& 0& 1\\
+0& 1& 1& 1 
+\end{bmatrix}\begin{bmatrix}
+0\\1\\0\\1
+\end{bmatrix}=\begin{bmatrix}
+0\\0
+\end{bmatrix}$$
+słowo $y$ należy do kodu, więc nie trzeba szukać słowa 
+\item znajdź przynajmniej jedno słowo kodu najbliższe słowu $z = (1, 1, 1, 0)$.
+
+\textbf{Odpowiedź: }
+\begin{align*}
+&\begin{bmatrix}
+0& 1& 0& 1\\
+0& 1& 1& 1 
+\end{bmatrix}\begin{bmatrix}
+1\\1\\1\\0
+\end{bmatrix}=\begin{bmatrix}
+1\\0
+\end{bmatrix} & \begin{bmatrix}
+0& 1& 0& 1\\
+0& 1& 1& 1 
+\end{bmatrix}\begin{bmatrix}
+0\\0\\1\\1
+\end{bmatrix}=\begin{bmatrix}
+1\\0
+\end{bmatrix}\\
+&\bbordermatrix{
+&&&&\cr
+ & 1 & 1 & 1 & 0\cr
+-& 0 & 0 & 1 & 1\cr
+=& 1 & 1 & 0 & 1
+}& \begin{bmatrix}
+0& 1& 0& 1\\
+0& 1& 1& 1 
+\end{bmatrix}\begin{bmatrix}
+1\\1\\0\\1
+\end{bmatrix}=\begin{bmatrix}
+0\\0
+\end{bmatrix}\\
+&\begin{bmatrix}
+0& 1& 0& 1\\
+0& 1& 1& 1 
+\end{bmatrix}\begin{bmatrix}
+1\\1\\1\\0
+\end{bmatrix}=\begin{bmatrix}
+1\\0
+\end{bmatrix} & \begin{bmatrix}
+0& 1& 0& 1\\
+0& 1& 1& 1 
+\end{bmatrix}\begin{bmatrix}
+0\\1\\1\\0
+\end{bmatrix}=\begin{bmatrix}
+1\\0
+\end{bmatrix}\\
+&\bbordermatrix{
+&&&&\cr
+ & 1 & 1 & 1 & 0\cr
+-& 0 & 1 & 1 & 0\cr
+=& 1 & 0 & 0 & 0
+}& \begin{bmatrix}
+0& 1& 0& 1\\
+0& 1& 1& 1 
+\end{bmatrix}\begin{bmatrix}
+1\\0\\0\\0
+\end{bmatrix}=\begin{bmatrix}
+0\\0
+\end{bmatrix}\\
+\end{align*}
+\end{enumerate}
+
+
+\subsection{Zadania domowe B}
+\paragraph{B1} Czy poniższy zbiór $C\subseteq \mathbb{F}^6_5$ jest kodem liniowym? jeśli tak, to podaj jego przykładowa, macierz generującą.
+\begin{enumerate}[label=\alph*)]
+\item $C = \{(x, x, y, y, 2z, 2z): x, y, z \in \mathbb{F}_5\}$.
+\item $C = \{(x, y, z, x, x + y, x + y + z): x, y, z \in \mathbb{F}_5\}$.
+\item $C = \{(x, y, z, x + 1, x + y + 1, x + y + z + 1): x, y, z \in \mathbb{F}_5\}$.
+\item $C = \{(x, y, z): x, y, z \in F5, x + y + z = 0\}$.
+\end{enumerate}
+
+\paragraph{B2} Niech $C\subseteq \mathbb{F}_3^5$ będzie kodem liniowym, generowanym przez wektory $(1,2,1,1,1)$ i $(1,1,1,2,1)$. Innymi słowy, $C$ jest podprzestrzenią liniową, której bazą jest $\{(1, 2, 1, 1, 1),(1, 1, 1, 2, 1)\}$. Czy poniższa macierz jest przykładowa, macierzą generującą tego kodu?
+\begin{enumerate}[label=\alph*)]
+\item $$\begin{bmatrix}
+1& 0& 1& 0& 1\\
+1& 2& 1& 1& 1 
+\end{bmatrix}$$
+\item  $$\begin{bmatrix}
+0& 1& 1& 0& 1\\
+2& 1& 1& 1& 1 
+\end{bmatrix}$$
+\item $$\begin{bmatrix}
+1& 2& 1& 1& 1\\
+2& 2& 2& 0& 2 
+\end{bmatrix}$$
+\end{enumerate}
+
+
+\paragraph{B3} Oto macierz generująca pewnego liniowego kodu binarnego:
+$$G =
+\begin{bmatrix}
+1& 1& 1& 1\\
+0& 1& 0& 1 
+\end{bmatrix}$$
+Wyznacz przykładowa, macierzą parzystości tego kodu.
+
+\paragraph{B4} Macierz parzystości pewnego ternarnego kodu liniowego $C\subseteq \mathbb{F}_3^6$ma postać
+$$\begin{bmatrix}
+2& 2& 1& 1& 0& 0\\
+1& 2& 0& 0& 1& 1\\
+2& 0& 2& 1& 0& 1
+\end{bmatrix}$$
+znajdź słowo kodu będące najbliżej słowu $(1, 0, 1, 2, 1, 1)$.
+
+\paragraph{B5} Kod liniowy $C\subseteq \mathbb{F}_3^7$ ma podaną obok macierz generującą.
+\begin{enumerate}[label=\alph*)]
+\item Jakiego wymiaru jest kod $C$?
+\item Ile słów ma kod $C$?
+\item Uzasadnij, nie wyznaczając macierzy parzystości, że $(0,0,1,1,2,1,2)$ jest słowem kodu $C$.
+\item Wyznacz macierz parzystości H tego kodu.
+\item Korzystając z macierzy parzystości, sprawdź, czy $(2,2,1,1,2,1,2)$ jest słowem kodu $C$.
+\item jeśli $(2, 2, 1, 1, 2, 1, 2)$ jest słowem kodu, to zapisz go w postaci kombinacji liniowej wierszy macierzy $G$. W przeciwnym wypadku popraw błędy, to znaczy znajdź (przykładowe) najbliższe mu słowo kodu.
+$$G =\begin{bmatrix}
+1& 0 &0 &0 &2& 0& 1\\
+0& 1& 0& 0& 0& 1& 1\\
+0& 0 &1 &0 &1 &2 &1\\
+0& 0 &0& 1& 1& 2& 1
+\end{bmatrix}$$
+\end{enumerate}
+
+\paragraph{B6} sprawdź, czy dla każdego doskonałego liniowego kodu długości $n$, wymiaru $k$, o rozstępie 3, nad ciałem o $q$ elementach zachodzi $n =\frac{q^{n-k}-1}{q-1}$.
+
+\paragraph{B7}
+\begin{enumerate}[label=\alph*)]
+\item Skonstruuj binarny kod $C$ Hamminga długości $7$.
+\item Dla tak skonstruowanego tak kodu, znajdź słowo, które do niego nie należy. i popraw w tym słowie błędy.
+\item sprawdź, czy do $C$ należy $(0, 1, 1, 1, 0, 1, 1)$ i jeśli nie, to popraw w nim błędy.
+\end{enumerate}
+
+
+\paragraph{B8} Oceń poprawność poniższych zdań. odpowiedź należy poprzeć, jak zwykle, albo uzasadnieniem ogólnym, albo przykładem, albo kontrprzykładem. poprawność przykładu/kontrprzykładu też należy uzasadnić. \\Uwaga: jeżeli
+ciało (alfabet) nie zostało podane, to oznacza, że może być dowolne.
+\begin{enumerate}[label=\alph*)]
+\item Istnieje liniowy kod ternarny, złożony z 5 słów.
+\item Istnieje liniowy kod złożony z 15 słów.
+\item jeżeli kod liniowy składa się z 13 słów, to jego wymiar wynosi 1.
+\item jeżeli $C$ jest ternarnym kodem liniowym i $(0, 1, 2),(0, 2, 1) \in C$, to $C$ liczy przynajmniej 9 słów.
+\item Poniższa macierz $H$ jest jest przykładowa, macierzą parzystości dla kodu binarnego o podanej macierzy generującej $G$.
+$$H =
+\begin{bmatrix}
+1& 0& 1& 0\\
+1& 1 &1& 1 
+\end{bmatrix}\ \ 
+G =
+\begin{bmatrix}
+1& 0& 1& 0\\
+1& 1& 1& 1 
+\end{bmatrix}$$
+\item Istnieje kod liniowy długości 3, złożony z 25 słów.
+\item Istnieje kod liniowy kod złożony z 32 słów, który ma rozstęp większy niż 5.
+\item Istnieje liniowy kod wymiaru 2, długości 4, o rozstępie 3, który nie jest doskonały w $\mathbb{F}^4_3$.
+\item Istnieje liniowy kod doskonały długości 7.
+\item Liniowy kod doskonały wymiaru 4, o długości 7 i o rozstępie 3.
+\item Kod Hamminga wymiaru 7, o słowach długości 10.
+\item Kod Hamminga o słowach długości 11.
+\item Kod Hamminga o długości 7.
+\end{enumerate}
+
+\subsection{Zadania na ćwiczenia}
+\paragraph{Zad.1} (Zadanie, z którego Można w przyszłości korzystać, nawet jeśli nie zrobimy go na ćwiczeniach.) Wykaż, że rozstęp kodu liniowego jest równy najmniejszej liczbie niezerowych współrzędnych występujących w niezerowych słowach kodu.
+
+\paragraph{Zad.2} Rozważmy język składający się ze słów dwuliterowych alfabetu $\mathbb{F}_3$. Do kodowania informacji w tym języku zastosowano kod $C$, w którym każdy znak powtarzamy $5$ razy (tzn. $12$ kodujemy jako $1111122222$).
+\begin{enumerate}[label=\alph*)]
+\item Czy istnieje macierz generująca tego kodu w postaci normalnej?
+\item Czy istnieje macierz parzystości tego kodu?
+\item Popraw błędy w słowie $1212121220$.
+\end{enumerate}
+
+
+\paragraph{Zad.3} Kod $C$ nad ciałem $\mathbb{F}_5$ składa się
+ze wszystkich słów $x_1x_2x_3x_4x_5$ spełniających warunki:
+$x_1 + x_2 + x_3 + x_4 + x_5 = 0$ i $x_1 + x_3 + x_5 = 0$.
+\begin{enumerate}[label=\alph*)]
+\item Ile słów należy do kodu $C$?
+\item znajdź przykładowa, macierz generującą $G$ kodu $C$ w postaci normalnej (o ile istnieje).
+\item znajdź przykładowa, macierz parzystości tego kodu.
+\end{enumerate}
+
+\paragraph{Zad.4} Kod ternarny $C\subseteq \mathbb{F}_3^8$ ma podaną macierz parzystości $H$.
+\begin{enumerate}[label=\alph*)]
+\item sprawdź, że słowo $y = (0, 0, 1, 1, 1, 1, 0, 0)$ nie należy do kodu.
+\item Czy istnieje słowo $z$ o wadze 1, dla którego $Hz = Hy$?
+\item Czy Można zmienić jedna, współrzędną słowa $y$ tak, aby otrzymany wektor był słowem kodu?
+\item Popraw błędy w $y$, to znaczy znajdź przynajmniej jedno słowo kodu najbliższe $y$. Czy istnieje ich więcej niż jedno?
+$$H =\begin{bmatrix}
+1& 0& 0& 1& 1& 1& 1& 2\\
+0& 1& 0& 1& 1& 0& 1& 1\\
+0& 0& 1& 2& 0& 1& 0& 0
+\end{bmatrix}$$
+\end{enumerate}
+
+\paragraph{Zad.5}
+\begin{enumerate}[label=\alph*)]
+\item Skonstruuj kod Hamminga dla $q = 7$ i $n = 8$.
+\item  Dla tak skonstruowanego kodu, popraw błędy w słowie $(1,0,0,3,1,6,0,0)$ (oczywiście, jeśli nie należy on do kodu).
+\item Czy istnieje słowo odległe od każdego słowa powyższego kodu na co najmniej trzech współrzędnych?
+\end{enumerate}
+
+
+%-------------------- WYKŁAD --------------------
