@@ -1,0 +1,311 @@
+\documentclass[a4paper,12pt]{article}
+
+%% Language and font encodings
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\selectlanguage{polish}
+
+%% Sets page size and margins
+%\usepackage[a4paper,top=2cm,bottom=2cm,left=2cm,right=4cm,asymmetric]{geometry}
+\usepackage{geometry}
+
+
+%% Useful packages
+\usepackage[fleqn]{amsmath}%[fleqn]
+\usepackage{xfrac} %\sfrac{}{}
+
+\usepackage{titlesec}%titles
+\titlelabel{\thetitle.\quad}
+\let\savenumberline\numberline
+\def\numberline#1{\savenumberline{#1.}}
+\usepackage{etoolbox}%dots in TOC
+\makeatletter
+\patchcmd{\l@section}
+{\hfil}
+{\leaders\hbox{\normalfont$\m@th\mkern \@dotsep mu\hbox{.}\mkern \@dotsep mu$}\hfill}
+{}{}
+\makeatother
+
+\usepackage{caption,graphicx}
+\usepackage{float}
+\usepackage{sidecap}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+\usetikzlibrary{trees}
+\usetikzlibrary{arrows,positioning,shapes,fit,calc,decorations.pathreplacing}
+\usetikzlibrary{graphs}
+\usetikzlibrary{graphs.standard}
+\usepackage{forest}
+\usepackage{tikzscale}
+\usepackage{pgfgantt} %Diagramy gantta http://bay.uchicago.edu/CTAN/graphics/pgf/contrib/pgfgantt/pgfgantt.pdf
+\usepackage{pgf}
+\usepackage{caption}
+
+\usepackage{fancybox}
+\usepackage{listings}
+
+\usepackage[colorinlistoftodos]{todonotes} %http://mirror.unl.edu/ctan/macros/latex/contrib/todonotes/todonotes.pdf
+
+\usepackage{array,longtable}
+
+\newcommand\floor[1]{\lfloor#1\rfloor} %PODŁOGA -> \floor
+\newcommand\ceil[1]{\lceil#1\rceil} %SUFIT -> \ceil
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\rhead{\thepage}
+\lhead{\leftmark}
+\rfoot{\thepage}
+\lfoot{\rightmark}
+
+%http://tex.stackexchange.com/questions/64170/which-package-to-use-for-writing-algorithms
+\usepackage{algorithm}% http://ctan.org/pkg/algorithms
+\usepackage{algpseudocode}% http://ctan.org/pkg/algorithmicx
+\newcommand{\var}[1]{{\ttfamily#1}}% variable
+
+\algnewcommand\algorithmicforeach{\textbf{for each}} %Algorithm foreach
+\algdef{S}[FOR]{ForEach}[1]{\algorithmicforeach\ #1\ \algorithmicdo}
+
+\usepackage{amsthm}
+\usepackage[inline]{enumitem} %enumerations
+\usepackage{multicol}
+
+\theoremstyle{definition}%~ %%% <-  Note that space!
+\newtheorem{lemma}{Lemat} %\begin{lemma} ... \end{lemma} LEMAT(?)
+\newtheorem{remark}{Wniosek}%\begin{remark} ... \end{remark} WNIOSEK 
+%\newtheorem*{remark*}{Wniosek}%\begin{remark} ... \end{remark} WNIOSEK bez liczby
+\newtheorem{theorem}{Twierdzenie}%\begin{theorem} ... \end{theorem}
+\newtheorem{fact}{Fakt} %\begin{fact} ... \end{fact}
+\newtheorem*{fact*}{Fakt} %\begin{fact*} ... \end{fact*} Fakt
+\newtheorem*{observation*}{Obserwacja}
+
+\newtheorem{example}{Przykład}
+\newtheorem*{example*}{Przykład} %\begin{example} ... \end{example}
+\theoremstyle{definition}
+\newtheorem{definition}{Definicja}%\begin{definition}{} ... \end{definition}
+%\newtheorem*{definition*}{Definicja}
+%\newtheorem*{hipoterm*}{Hipoteza}%\begin{hipoterm*}[] ... \end{hipoterm*}
+\newtheorem{hipoterm}{Hipoteza}%\begin{hipoterm*}[] ... \end{hipoterm*}
+\theoremstyle{problem}
+\newtheorem{problem}{Problem}%\begin{problem}{} ... \end{problem}
+\newtheorem*{problem*}{Problem}
+
+\let\originalforall=\forall%FORALL
+\renewcommand{\forall}{\mathop{\vcenter{\hbox{\Large$\originalforall$}}}}
+\let\originalexists=\exists%EXISTS
+\renewcommand{\exists}{\mathop{\vcenter{\hbox{\Large$\originalexists$}}}}
+
+\usepackage{cancel} %skreślenie równania \xcancel{...} \cancel{} lub \bcancel{}
+
+\usepackage{amsfonts}
+
+\usepackage{comment}
+
+\usepackage{xcolor,colortbl}
+\usepackage{multirow}
+
+%\usepackage{wrapfig} %wrap text around figure
+
+\usepackage{pdfpages}%\includepdf{file}
+
+\usepackage{etoolbox}
+\let\bbordermatrix\bordermatrix
+\patchcmd{\bbordermatrix}{8.75}{4.75}{}{}
+\patchcmd{\bbordermatrix}{\left(}{\left[}{}{}
+\patchcmd{\bbordermatrix}{\right)}{\right]}{}{}
+%\bbordermatrix{}
+
+\allowdisplaybreaks
+
+\title{Struktury Dyskretne - Notatki}
+\author{Piotr Parysek\\
+\href{mailto:piotr.parysek@outlook.com}{piotr.parysek@outlook.com} }
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+\section[Wykład 10: 18-V-2017 - Temat: Teoria kodów]{Temat: Teoria kodów}
+\subsection{Podstawowe definicje}
+\begin{description}
+\item[$Q$] alfabet $$Q=\{0,1,2,\dots ,q-1\}$$
+$|Q|=q$ $\rightarrow$ liczba elementów alfabetu.\\
+Na przykład:\\
+$Q=\{0,1\}\rightarrow$ kody binarne, gdzie $|Q|=q=2$
+\item[$n$] długość słowa
+\end{description}
+inne przykłady kodów:
+\begin{itemize}
+\item Kod ASCII $0-127\rightarrow 2^7$ gdzie ostatni bit to bit parzystości (mowa o historii)
+\item PESEL, przykłady:
+\begin{itemize}
+\item[] $11304900014\rightarrow$ zły kod PESEL - dzień miesiąca 49? 
+\item[] $11300900014\rightarrow$ niepoprawny kod PESEL
+\item[] $11304900014\rightarrow$ kom mogący być kodem PESEL
+\end{itemize}
+\end{itemize}
+
+\subsection{Teoria kodów:}
+\begin{observation*}
+Istnieje $q^n$ różnych słów długości $n$ nad alfabetem $Q$, $|Q|=q$.
+\end{observation*}
+\begin{definition}[Kod]
+Kodem $C$ o długości $n$ nad alfabetem $Q$ nazywamy dowolny podzbiór o długości $n$ którego literami są elementy alfabetu $Q$ co zapisujemy: $$C\subseteq Q^n$$
+Przykładowo słowo $\bar{x}=010111$ będziemy traktować jako wektor (kolumnowy) o argumentach $010111$, czyli: $$\bar{x}=\begin{bmatrix}
+0\\1\\0\\1\\1\\1
+\end{bmatrix}$$
+\end{definition}
+\begin{definition}[Odległość Hamminga]
+W teorii kodów wyznaczamy \textbf{odległość Hamminga} to znaczy: $$d(\bar{x},\bar{y})=|\{j:x_i\neq y_i\}|$$
+\begin{multicols}{2}
+$$\bar{x}=0,1,2,5,7,1$$
+$$\bar{y}=0,1,1,5,6,1$$
+$$\bar{z}=7,1,2,5,7,1$$
+\vfill\null
+\columnbreak
+$$d(\bar{x},\bar{y})=2$$
+$$d(\bar{x},\bar{z})=1$$
+\end{multicols}
+\end{definition}
+
+\begin{definition}[Rozstęp kodu]
+\textbf{Rozstępem kodu} $C$ nazywamy najmniejszą odległość pomiędzy wyrazami tego kodu: $$r(C)=\min _{\begin{matrix}
+\bar{x},\bar{y}\in C\\
+\bar{x}\neq \bar{y}
+\end{matrix}}d(\bar{x},\bar{y})$$
+\end{definition}
+\begin{observation*}
+Jeśli chcemy by kod $C$ był odporny na zakłócenia komunikacji powudujące co najwyżej $r$ błędów to: $$r(C)=2R+1$$
+\end{observation*}
+\begin{problem*}
+Oszacować liczbę wyrazów w kodzie $C$ o długości $n$ i rozstępie $r(C)=2R+1$
+\end{problem*}
+\subsection{Oszacowanie objętościowe}
+\begin{itemize}
+\item Weźmy $\bar{x}$
+\item Ile jest wyrazów $\bar{y}$ takich, że $d(\bar{x},\bar{y})\leq r$?\\
+Ile jest wyrazów w kuli o środku w $\bar{x}$ i promieniu $r$?\footnote{\#Shame: $\binom{n}{k}=\frac{n!}{k!(n-k)!}$}
+\begin{align*}
+&\text{Dane: }n\ \bar{x}=00\dots 0,\ Q=\{0,1,\dots ,q-1\}\\
+&|\{\bar{y}:d(\bar{x},\bar{y})=0\}|=1\\
+&|\{\bar{y}:d(\bar{x},\bar{y})=1\}|=n(q-1)\\
+&|\{\bar{y}:d(\bar{x},\bar{y})=2\}|=\binom{n}{2}(q-1)(q-1)\\
+&|\{\bar{y}:d(\bar{x},\bar{y})=i\}|=\binom{n}{i}(q-1)^i\\
+&\sum _{i=0}^R\binom{n}{i}(q-1)^i\\
+&|C|\sum _{i=0}^R\binom{n}{i}(q-1)^i\leq q^n\\
+&|C|\leq  q^n\left(\sum _{i=0}^R\binom{n}{i}(q-1)^i\right)^{-1}
+\end{align*}
+\end{itemize}
+\begin{definition}[Kod doskonały]
+Kod $C$ o długości $n$ i odstępie $r(C)=2R+1$ nazywamy \textbf{doskonałym} gdy: $$|C|\sum _{i=0}^R\binom{n}{i}(q-1)^i= q^n$$
+\end{definition}
+\begin{example*}
+4 kod ternarny $C_4(9)$ składający się z 9 słów: $$0000,0111,0222,1021,2012,1102,2201,2120,1210$$ jest kodem doskonałym o rozstępie 3:
+\begin{align*}
+&n=4,\ q=3,\ r=1,\ |C|=9\\
+&9*\sum_{i=0}^R(q-1)^i=9*\left(1*2^0+4*2^1\right)=9*9=3^4
+\end{align*}
+\end{example*}
+
+\subsection{Kody liniowe}
+\begin{definition}[Kody Liniowe]
+Niech $F_q$ będzie ciałem o $q$ elementach.\\ Takie ciało istnieje wtedy i tylko wtedy, gdy $q$ jest potęgą liczby pierwszej $$q=p^n$$ $p\rightarrow$ liczba pierwsza.\\ Na naszych zajęciach zawsze będziemy zakładać, że $q$ jest liczbą pierwszą.
+\begin{align*}
+&q\rightarrow\text{Liczba pierwsza}\\
+&F_q=\{0,1,2,\dots ,q-1\}\\
+&\text{Operacje: }\\
+&&+ (\mod q)\\
+&&* (\mod q)
+\end{align*}
+\end{definition}
+\begin{example*}
+Dla $F_7$ załóżmy, że mamy równanie:
+\begin{align*}
+&6x=2\\
+&6x\equiv  2 (\mod 7)\\
+&x \equiv 5
+\end{align*}
+\end{example*}
+
+Jeśli mamy kilka wektorów $\bar{x}_1,\bar{x}_2,\dots ,\bar{x}_n\in Q^n=F_q^n$
+$$\alpha _1 \bbordermatrix{&\bar{x}_1\cr
+&\vdots\cr &\vdots\cr &\vdots}+\alpha _2 \bbordermatrix{&\bar{x}_2\cr
+&\vdots\cr &\vdots\cr &\vdots}+\dots +\alpha _n \bbordermatrix{&\bar{x}_n\cr
+&\vdots\cr &\vdots\cr &\vdots}=\bbordermatrix{&\bar{y}\cr
+&\vdots\cr &\vdots\cr &\vdots}$$
+
+\begin{definition}[ n,k kod]
+Kodem $[n,k]$ będziemy nazywali dowolną podprzestrzeń liniową $C$ wymiaru $k$ w $F_q^n=Q^n$.\\$[n,k]$ kod $C$ nazywamy $[n,k,d]$ kodem jeśli $r(C)=d$
+\end{definition}
+
+\begin{definition}[Wektor bazowy]
+Niech $\bar{x}_1,\bar{x}_2,\dots ,\bar{x}_k$ będą wektorami bazowymi $C$, to znaczy każdy element $\bar{y}\in C$ da się przedstawić w sposób jednoznaczny jako kombinację $\bar{x}_1,\bar{x}_2,\dots ,\bar{x}_k$ to znaczy istnieją $\alpha _1,\alpha _2,\dots ,\alpha _k \in Q$ takie, że:
+$$\bar{y}=\alpha _1\bar{x}_1+\alpha _2\bar{x}_2+\dots +\alpha _k\bar{x}_k$$
+\textbf{Pytanie:} ile elementów ma $[n,k]$ kod?\\
+\textbf{Odpowiedź:} $$\underbrace{q*q*\dots *q}_k=q^k$$
+\end{definition}
+\begin{example*}[Przykład z kodu termanego]
+9 słów, $Q=3$, $9=3^2$ $[4,2]$, $|C|=9$
+$$\bar{y}=\alpha _1\begin{bmatrix}
+0\\1\\1\\1
+\end{bmatrix}+\alpha _2\begin{bmatrix}
+1\\0\\2\\1
+\end{bmatrix}\Leftrightarrow \begin{bmatrix}
+2\\1\\2\\0
+\end{bmatrix}=1\begin{bmatrix}
+0\\1\\1\\1
+\end{bmatrix}+2\begin{bmatrix}
+1\\0\\2\\1
+\end{bmatrix}$$
+\end{example*}
+
+\begin{definition}[Macierz generująca]\textbf{Macierzą generującą} $G$ $[n,k]$ kodu $C$ generowanego przez bazę $\bar{x}_1,\bar{x}_2,\dots ,\bar{x}_k$ nazywamy macierz, której wierszami są wektory: $\bar{x}_1^T,\bar{x}_2^T,\dots ,\bar{x}_k^T$
+
+Dla przykładu powyżej:
+$$G=\begin{bmatrix}
+0&1&1&1\\
+1&0&2&1
+\end{bmatrix},\ G=\begin{bmatrix}
+0&2&2&2\\
+1&2&1&0
+\end{bmatrix}$$
+Zauważmy, że $$C=\{\alpha ^Y*G:\alpha ^T\in G^k\}$$
+Dalej ten sam przykład:
+$$[ 1, 2 ] \begin{bmatrix}
+0&1&1&1\\
+1&0&2&1
+\end{bmatrix}=\begin{bmatrix}
+2&1&2&0
+\end{bmatrix}=1*\begin{bmatrix}
+0&1&1&1
+\end{bmatrix}+2\begin{bmatrix}
+0&1&1&1
+\end{bmatrix}$$
+\end{definition}
+
+
+
+\begin{definition}[Macierz parzystości]
+\textbf{Macierzą parzystości} $H$ $[n,k]$ kodu $C$ jest macierz o rozmiarze $(n-k)\times n$ o rzędzie $n-k$ taka, że $$GH^T=O$$ gdzie $O$ oznacza macierz zerową. 
+\end{definition}
+\begin{fact*}
+Słowo $\bar{y}\in C$ wtedy i tylko wtedy, gdy $K\bar{y}=0$
+\end{fact*}
+
+\begin{definition}[Ortogonalność]
+W przestrzeni liniowej z iloczynem skalarnym $<\ >$ wektory $u,v\in V$ są \textbf{ortogonalne} (lub prostopadłe) gdy $<u,v>=0$. Piszemy wtedy $u\bot v$.
+\end{definition}
+
+\begin{definition}[Układ ortogonalny, układ ortonormalny]
+Mówimy, że układ wektorów $(v_i)_{i\in I}$ z przestrzeni $V$ jest \textbf{układem ortogonalnym} gdy $<v_j, v_k> = 0$ dla $j\neq k$ . \textbf{Układ} jest \textbf{ortonormalny} gdy jest ortogonalny oraz $<v_j
+, v_j> = 1$ dla $j\in I$.
+\end{definition}
+
+
+\end{document}
